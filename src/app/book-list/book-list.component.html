@@ -1,0 +1,83 @@
+<nav class="navbar navbar-light fixed-top" style="background-color: #FFF033">
+  <a class="navbar-brand" href="/" style="color: #AD00FF">
+    <img src="../../assets/images/logo.png" width="80" height="80" class="ml-2 mr-3" alt="">
+    <b>Librería Google</b>
+  </a>
+  <form class="form-inline" action="" method="GET">
+    <input class="form-control search mr-sm-2" id="query" name="query" type="search" [(ngModel)]="search" autocomplete="off">
+    <button class="btn btn btn-info my-2 my-sm-0" type="button" value="search" (click)="searchBookFunction(search)" >Buscar</button>
+  </form>
+</nav>
+
+<div class="text-center">
+  <h2 class="mt-5 mb-5">Bienvenido a la Librería más grande del mundo</h2>
+</div>
+
+<div class="input-group ml-5">
+  <span class="input-group-text"><b>Filtrar por Categoría</b></span>
+  <input class="form-control mr-sm-2" type="text" name="filterCategorie" [(ngModel)]="filterCategorie" autocomplete="off">
+</div>
+
+<section *ngIf="!items">
+  <div class="row mt-4 mb-5 d-flex justify-content-center">
+    <div *ngFor="let book of list | filter:filterCategorie" class="col-3 ml-4 mb-4">
+      <div class="card">
+        <img [src]="book.volumeInfo.imageLinks?.thumbnail" class="card-img-top p-4" alt="{{ book.title }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ book.volumeInfo.title }}</h5>
+          <p class="card-text box">{{ book.volumeInfo.description }}</p>
+          <div class="mb-4">
+          </div>
+          <div class="d-flex justify-content-end">
+            <button class="btn btn-primary" (click)="openModal(book.id)">Ver detalle</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section *ngIf="items">
+  <div class="row mt-4 mb-5 d-flex justify-content-center">
+    <div *ngFor="let book of items | filter:filterCategorie" class="col-3 ml-4 mb-4">
+      <div class="card">
+        <img [src]="book.volumeInfo.imageLinks?.thumbnail" class="card-img-top p-4" alt="{{ book.title }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ book.volumeInfo.title }}</h5>
+          <p class="card-text box">{{ book.volumeInfo.description }}</p>
+          <div class="mb-4">
+          </div>
+          <div class="d-flex justify-content-end">
+            <button class="btn btn-primary" (click)="openModal(book.id)">Ver detalle</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div #myModal class="modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h5 class="modal-title">{{ detailBook.volumeInfo?.title }}</h5>
+      </div>
+      <div  class="modal-body">
+        <p><b>Autor(es):</b> {{ detailBook.volumeInfo?.authors }}</p>
+        <p><b>Publicación:</b> {{ detailBook.volumeInfo?.publishedDate }}</p>
+        <p><b>Páginas:</b> {{ detailBook.volumeInfo?.pageCount }}</p>
+        <p><b>Categoría:</b> {{ detailBook.volumeInfo?.categories }}</p>
+        <a class="justify-content-end" [href]="detailBook.volumeInfo?.infoLink" target="_blank">Más información</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="close()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="text-center fixed-bottom" style="background-color: #FFF033;">
+  <div class="text-center p-3" style="color: #AD00FF">
+    © 2023 Copyright: Librería Google
+  </div>
+</footer>

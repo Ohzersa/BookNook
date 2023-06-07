@@ -1,0 +1,35 @@
+.btn-info {
+  background-color: #AD00FF;
+}
+
+.card-img-top {
+  height: 400px;
+}
+
+button .btn {
+  color: #FFF;
+}
+
+.box {
+  height: 200px;
+  overflow: auto;
+}
+
+.input-group {
+  width: fit-content
+}
+
+.input-group-text {
+  background-color: #FFF033;
+  color: #AD00FF;
+}
+
+.btn-primary {
+  background-color: #FFF033;
+  color: #AD00FF;
+  border: none;
+}
+
+.btn-primary:hover {
+  color: #AD00FF;
+}
